@@ -8,6 +8,8 @@ class Application
 {
     function __construct()
     {
+        $db = Mysqldb::getInstance()->getDatabase();
+
         print "Bienvenido a mi tienda virtual";
     }
 }
