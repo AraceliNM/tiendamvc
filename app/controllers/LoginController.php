@@ -97,9 +97,15 @@ class LoginController extends Controller
             if (count($errors) == 0) {
                 print 'Pasamos a dar de alta al usuario en la BD';
             } else {
-                
-            }
+                $data = [
+                    'titulo' => 'Registro',
+                    'menu' => false,
+                    'errors' => $errors,
+                    'dataForm' => $dataForm
+                ];
 
+                $this->view('register', $data);
+            }
         } else {
             // Mostramos el formulario
             $data = [
