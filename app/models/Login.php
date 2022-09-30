@@ -71,8 +71,6 @@ class Login
         $fullName = $user->first_name . ' ' .
             $user->last_name_1 . ' ' .
             $user->last_name_2;
-            // $user->last_name_2 ?? ''; Seria si no es obligatorio
-            // Luego usar el trim con $fullName para quitar el espacio de last_name_1
 
         $msg = $fullName . ', accede al siguiente enlace para cambiar tu contraseña. <br>';
         $msg .= '<a href="' . ROOT . 'login/changePassword/' . $user->id . '">Cambia tu clave de acceso</a>';
