@@ -304,4 +304,29 @@ class LoginController extends Controller
             $this->view('changepassword', $data);
         }
     }
+
+    public function verifyUser()
+    {
+        $errors = [];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $user = $_POST['user'] ?? '';
+            $password = $_POST['password'] ?? '';
+            $remember = isset($_POST['remember']) ? 'on' : 'off';
+
+            $errors = $this->model->verifyUser($user, $password);
+
+            if ( ! $errors ) {
+                print 'Bienvenid@';
+            } else {
+                print 'Lo sentimos pero no tiene acceso';
+            }
+
+        } else {
+
+            $this->index();
+
+        }
+    }
 }
