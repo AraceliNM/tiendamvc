@@ -116,6 +116,15 @@ class AdminProductController extends Controller
                 array_push($errors, 'Debes seleccionar un tipo válido');
             }
 
+            $image = strtolower($image);
+
+            if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+                move_uploaded_file($_FILES['image']['tmp_name'], 'img/' . $image);
+                Validate::resizeImage($image, 240);
+            } else {
+                array_push($errors, 'Error al subir el archivo de imagen');
+            }
+
             // Creamos el array de datos
             $dataForm = [
                 'type'  => $type,
@@ -135,8 +144,6 @@ class AdminProductController extends Controller
                 'mostSold' => $mostSold,
                 'new' => $new,
             ];
-
-            var_dump($dataForm);
 
             if ( ! $errors ) {
 
