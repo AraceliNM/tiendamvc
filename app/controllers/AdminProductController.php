@@ -321,7 +321,7 @@ class AdminProductController extends Controller
         $product = $this->model->getProductById($id);
 
         $data = [
-            'titulo' => 'Administración de Productos - Alta',
+            'titulo' => 'Administración de Productos - Edición',
             'menu' => false,
             'admin' => true,
             'type' => $typeConfig,
@@ -336,6 +336,27 @@ class AdminProductController extends Controller
 
     public function delete($id)
     {
+        $errors = [];
 
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $errors = $this->model->delete($id);
+
+            if (empty($errors)) {
+                header('location:' . ROOT . 'AdminProduct');
+            }
+
+        }
+
+        $product = $this->model->getProductById($id);
+        $typeConfig = $this->model->getConfig('productType');
+
+        $data = [
+            'titulo' => 'Administración de Productos - Eliminación',
+            'menu' => false,
+            'admin' => true,
+            'type' => $typeConfig,
+            'product' => $product,
+        ];
     }
 }
